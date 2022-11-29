@@ -16,8 +16,9 @@ public class ProjectRest {
         return projectService.findByUserId(id);
     }
 
-    @PostMapping("/add/{us}/{nom}/{description}/{cout}")
-    public Project save(@PathVariable("us") String us, @PathVariable("nom") String nom,@PathVariable("description") String desc, @PathVariable("cout") double cout) {
-        return projectService.save(us,nom,desc,cout);
+    @PostMapping("/")
+    public Project save(@RequestBody Project p) {
+        System.out.println("user : "+ p.getUser());
+        return projectService.save(p);
     }
 }

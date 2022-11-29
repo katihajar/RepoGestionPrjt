@@ -22,15 +22,18 @@ public class ProjectService {
         return projectRepo.findByUserId(id);
     }
 
+    public Project findByNomProjet(String nom) {
+        return projectRepo.findByNomProjet(nom);
+    }
 
-    public Project save( String us, String nom,String desc,double cout) {
-        User user = userService.findById(us);
-        Project p = new Project();
-        p.setNomProjet(nom);
-        p.setUser(user);
-        p.setCout(cout);
-        p.setDescription(desc);
-        return projectRepo.save(p);
+    public Project save(Project p) {
+        Project pr = findByNomProjet(p.getNomProjet());
+        if(pr !=null) {
+            System.out.println("exist");
+            return null;
+        } else {
+            return projectRepo.save(p);
+        }
 
     }
 
