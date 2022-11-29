@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
 
 @Service
 public class ProjectService {
@@ -32,6 +31,8 @@ public class ProjectService {
             System.out.println("exist");
             return null;
         } else {
+            p.setStatutChef(false);
+            p.setStatutDirect(false);
             return projectRepo.save(p);
         }
 

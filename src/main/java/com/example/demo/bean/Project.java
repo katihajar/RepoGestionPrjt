@@ -6,25 +6,24 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @Document
 public class Project {
     @Id
     String id;
-    @NonNull
     private String nomProjet;
-    @NonNull
     private String description;
-    @NonNull
     private double cout;
-    @NonNull
+    private Date dateDebut;
+    private Date dateFin;
+    private boolean statutChef;
+    private boolean statutDirect;
     @DBRef
     private User user;
-
     public Project() {
     }
-
-
     public String getNomProjet() {
         return nomProjet;
     }
@@ -63,5 +62,37 @@ public class Project {
 
     public void setCout(double cout) {
         this.cout = cout;
+    }
+
+    public Date getDateDebut() {
+        return dateDebut;
+    }
+
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public Date getDateFin() {
+        return dateFin;
+    }
+
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
+    }
+
+    public boolean isStatutChef() {
+        return statutChef;
+    }
+
+    public void setStatutChef(boolean statutChef) {
+        this.statutChef = statutChef;
+    }
+
+    public boolean isStatutDirect() {
+        return statutDirect;
+    }
+
+    public void setStatutDirect(boolean statutDirect) {
+        this.statutDirect = statutDirect;
     }
 }
