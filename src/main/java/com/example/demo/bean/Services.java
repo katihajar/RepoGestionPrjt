@@ -13,6 +13,10 @@ public class Services {
     String id;
     private String nomService;
 
+    public Services(String id, String nomService) {
+        this.id = id;
+        this.nomService = nomService;
+    }
 
     public String getId() {
         return id;

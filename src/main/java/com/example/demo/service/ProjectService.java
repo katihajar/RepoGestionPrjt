@@ -6,11 +6,10 @@ import com.example.demo.bean.User;
 import com.example.demo.repository.ProjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-
 
 @Service
 public class ProjectService {
@@ -18,60 +17,22 @@ public class ProjectService {
     ProjectRepo projectRepo;
     @Autowired
     UserService userService;
-    @Autowired
-    TaskSercice taskSercice;
 
     public Project findByUserId(String id) {
         return projectRepo.findByUserId(id);
     }
 
-    public Project findByNomProjet(String nom) {
-        return projectRepo.findByNomProjet(nom);
+
+    public Project save( String us, String nom,String desc,double cout) {
+        User user = userService.findById(us);
+        Project p = new Project();
+        p.setNomProjet(nom);
+        p.setUser(user);
+        p.setCout(cout);
+        p.setDescription(desc);
+        return projectRepo.save(p);
+
     }
 
-    public Project findProjectById(String id) {
-        return projectRepo.findProjectById(id);
-    }
 
-    public Project save(Project p) {
-        Project pr = findByNomProjet(p.getNomProjet());
-        if(pr !=null) {
-            System.out.println("exist");
-            return null;
-        } else {
-            p.setStatutChef("en attente");
-            p.setStatutDirect("en attente");
-            Project pp=projectRepo.save(p);
-            if(pp.getTasks()!=null){
-                taskSercice.saveAll(pp, pp.getTasks());
-            }
-            return pp;
-        }
-    }
-
-    @Transactional
-    public int deleteListProjectById(List<Project> projectsList) {
-        int res = 0;
-        for (int i = 0; i < projectsList.size(); i++) {
-            res += deleteProjectByid(projectsList.get(i).getId());
-        }
-        return res;
-    }
-
-    @Transactional
-    public int deleteProjectByid(String id) {
-        int deleteByid = projectRepo.deleteProjectByid(id);
-        return deleteByid;
-    }
-
-    public Project changeStautChef(String id,String st) {
-        Project pro =findProjectById(id);
-        pro.setStatutChef(st);
-        return projectRepo.save(pro);
-    }
-    public Project changeStautDirect(String id,String stDir) {
-        Project pro =findProjectById(id);
-        pro.setStatutDirect(stDir);
-        return projectRepo.save(pro);
-    }
 }

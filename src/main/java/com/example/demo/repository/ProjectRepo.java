@@ -7,7 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProjectRepo extends MongoRepository<Project, String> {
     Project findByUserId(String id);
-    Project findProjectById(String id);
-    Project findByNomProjet(String nom);
-    int deleteProjectByid(String id);
 }
