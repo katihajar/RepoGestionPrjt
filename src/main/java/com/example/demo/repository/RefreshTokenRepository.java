@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.document.RefreshToken;
+import com.example.demo.bean.RefreshToken;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

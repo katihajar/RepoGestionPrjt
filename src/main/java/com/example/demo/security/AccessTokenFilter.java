@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.document.User;
+import com.example.demo.bean.User;
 import com.example.demo.jwt.JwtHelper;
 import com.example.demo.service.UserService;
 import lombok.extern.log4j.Log4j2;

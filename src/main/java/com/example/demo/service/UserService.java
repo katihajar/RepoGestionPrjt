@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.document.User;
+import com.example.demo.bean.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

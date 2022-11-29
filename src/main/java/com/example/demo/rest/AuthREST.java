@@ -1,7 +1,7 @@
 package com.example.demo.rest;
 
-import com.example.demo.document.RefreshToken;
-import com.example.demo.document.User;
+import com.example.demo.bean.RefreshToken;
+import com.example.demo.bean.User;
 import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.SignupDTO;
 import com.example.demo.dto.TokenDTO;
@@ -61,7 +61,7 @@ public class AuthREST {
     @PostMapping("signup")
     @Transactional
     public ResponseEntity<?> signup(@Valid @RequestBody SignupDTO dto) {
-        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()));
+        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()),dto.getNom(), dto.getPrenom(),dto.getNumero(),dto.getRole() );
         userRepository.save(user);
 
         RefreshToken refreshToken = new RefreshToken();

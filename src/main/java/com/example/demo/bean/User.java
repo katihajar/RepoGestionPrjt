@@ -1,4 +1,4 @@
-package com.example.demo.document;
+package com.example.demo.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
@@ -26,10 +26,21 @@ public class User implements UserDetails {
     @JsonIgnore
     @NonNull
     private String password;
+    @NonNull
+    private String nom;
+    @NonNull
+    private String prenom;
+    @Indexed(unique = true)
+    @NonNull
+    private String numero;
+    @NonNull
+    private Role role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.EMPTY_LIST;
     }
+
 
     @Override
     public String getPassword() {
@@ -40,6 +51,7 @@ public class User implements UserDetails {
     public String getUsername() {
         return username;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
