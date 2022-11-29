@@ -18,11 +18,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthREST {
@@ -42,11 +44,10 @@ public class AuthREST {
     @PostMapping("/login")
     @Transactional
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO dto) {
-        System.out.println(dto.getUsername());
-        System.out.println(dto.getPassword());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = (User) authentication.getPrincipal();
+
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setOwner(user);
         refreshTokenRepository.save(refreshToken);
@@ -54,14 +55,15 @@ public class AuthREST {
         String accessToken = jwtHelper.generateAccessToken(user);
         String refreshTokenString = jwtHelper.generateRefreshToken(user, refreshToken);
 
-        return ResponseEntity.ok(new TokenDTO(user, accessToken, refreshTokenString));
+        return ResponseEntity.ok(new TokenDTO(user.getId(), accessToken, refreshTokenString));
     }
 
-    @PostMapping("/signup")
+    @PostMapping("signup")
     @Transactional
     public ResponseEntity<?> signup(@Valid @RequestBody SignupDTO dto) {
-        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhone(), dto.getNom(), dto.getPrenom(), dto.getRole(), dto.getServices());
+        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()),dto.getNom(), dto.getPrenom(),dto.getNumero(),dto.getRole() );
         userRepository.save(user);
+
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setOwner(user);
         refreshTokenRepository.save(refreshToken);
@@ -69,7 +71,7 @@ public class AuthREST {
         String accessToken = jwtHelper.generateAccessToken(user);
         String refreshTokenString = jwtHelper.generateRefreshToken(user, refreshToken);
 
-        return ResponseEntity.ok(new TokenDTO(user, accessToken, refreshTokenString));
+        return ResponseEntity.ok(new TokenDTO(user.getId(), accessToken, refreshTokenString));
     }
 
     @PostMapping("logout")
@@ -106,7 +108,7 @@ public class AuthREST {
             User user = userService.findById(jwtHelper.getUserIdFromRefreshToken(refreshTokenString));
             String accessToken = jwtHelper.generateAccessToken(user);
 
-            return ResponseEntity.ok(new TokenDTO(user, accessToken, refreshTokenString));
+            return ResponseEntity.ok(new TokenDTO(user.getId(), accessToken, refreshTokenString));
         }
 
         throw new BadCredentialsException("invalid token");
@@ -129,7 +131,7 @@ public class AuthREST {
             String accessToken = jwtHelper.generateAccessToken(user);
             String newRefreshTokenString = jwtHelper.generateRefreshToken(user, refreshToken);
 
-            return ResponseEntity.ok(new TokenDTO(user, accessToken, newRefreshTokenString));
+            return ResponseEntity.ok(new TokenDTO(user.getId(), accessToken, newRefreshTokenString));
         }
 
         throw new BadCredentialsException("invalid token");

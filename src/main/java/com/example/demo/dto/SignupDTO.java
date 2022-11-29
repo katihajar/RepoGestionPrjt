@@ -1,12 +1,9 @@
 package com.example.demo.dto;
 
 import com.example.demo.bean.Role;
-import com.example.demo.bean.Services;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -26,15 +23,12 @@ public class SignupDTO {
     @NotBlank
     @Size(min = 6, max = 60)
     private String password;
-    @NotBlank
-    @Size(min = 6, max = 60)
-    private String phone;
-    @NotBlank
+    @NonNull
     private String nom;
-    @NotBlank
+    @NonNull
     private String prenom;
-    @DBRef
+    @NonNull
+    private String numero;
+    @NonNull
     private Role role;
-    @DBRef
-    private Services services;
 }
