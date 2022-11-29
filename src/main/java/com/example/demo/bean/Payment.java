@@ -3,7 +3,6 @@ package com.example.demo.bean;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -28,7 +27,6 @@ public class Payment {
     private double amount;
 
     @NonNull
-    @DBRef
     private Project project;
 
     public Payment(@NonNull String paymentName,
