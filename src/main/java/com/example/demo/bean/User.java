@@ -25,29 +25,15 @@ public class User implements UserDetails {
     @Id
     String id;
     @Indexed(unique = true)
-    @NonNull
     private String username;
     @Indexed(unique = true)
-    @NonNull
     private String email;
-    @JsonIgnore
-    @NonNull
     private String password;
-    @JsonIgnore
-    @NonNull
     private String phone;
-    @JsonIgnore
-    @NonNull
     private String nom;
-    @JsonIgnore
-    @NonNull
     private String prenom;
-    @JsonIgnore
-    @NonNull
     @DBRef
     private Role role;
-    @JsonIgnore
-    @NonNull
     @DBRef
     private Services services;
     @Override
@@ -55,7 +41,16 @@ public class User implements UserDetails {
         return Collections.EMPTY_LIST;
     }
 
-
+    public User(String username, String email, String password, String phone, String nom, String prenom, Role role, Services services) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.role = role;
+        this.services = services;
+    }
 
     @Override
     public String getPassword() {
