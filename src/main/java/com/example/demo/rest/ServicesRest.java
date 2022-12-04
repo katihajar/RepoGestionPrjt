@@ -16,7 +16,7 @@ public class ServicesRest {
     @Autowired
     ServiceService serviceService;
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<Services> findAll() {
         return serviceService.findAll();
     }

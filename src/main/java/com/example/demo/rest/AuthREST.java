@@ -1,13 +1,17 @@
 package com.example.demo.rest;
 
 import com.example.demo.bean.RefreshToken;
+import com.example.demo.bean.Role;
+import com.example.demo.bean.Services;
 import com.example.demo.bean.User;
 import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.SignupDTO;
 import com.example.demo.dto.TokenDTO;
 import com.example.demo.jwt.JwtHelper;
 import com.example.demo.repository.RefreshTokenRepository;
+import com.example.demo.repository.RoleRepo;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.ServiceService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +43,11 @@ public class AuthREST {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleREST roleREST;
+    @Autowired
+    ServiceService serviceService;
+
     @PostMapping("/login")
     @Transactional
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO dto) {
@@ -62,7 +71,9 @@ public class AuthREST {
     @PostMapping("/signup")
     @Transactional
     public ResponseEntity<?> signup(@Valid @RequestBody SignupDTO dto) {
-        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhone(), dto.getNom(), dto.getPrenom(), dto.getRole(), dto.getServices());
+        Role role = roleREST.findByName(dto.getRole().getName());
+        Services services = serviceService.findByNomService(dto.getServices().getNomService());
+        User user = new User(dto.getUsername(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getPhone(), dto.getNom(), dto.getPrenom(), role, services);
         userRepository.save(user);
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setOwner(user);
