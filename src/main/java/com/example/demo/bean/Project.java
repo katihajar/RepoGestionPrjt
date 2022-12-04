@@ -1,5 +1,6 @@
 package com.example.demo.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NonNull;
 import org.springframework.data.annotation.Id;
@@ -7,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Document
@@ -18,10 +20,12 @@ public class Project {
     private double cout;
     private Date dateDebut;
     private Date dateFin;
-    private boolean statutChef;
-    private boolean statutDirect;
+    private String statutChef;
+    private String statutDirect;
     @DBRef
     private User user;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Task> tasks;
     public Project() {
     }
     public String getNomProjet() {
@@ -80,19 +84,27 @@ public class Project {
         this.dateFin = dateFin;
     }
 
-    public boolean isStatutChef() {
+    public String isStatutChef() {
         return statutChef;
     }
 
-    public void setStatutChef(boolean statutChef) {
+    public void setStatutChef(String statutChef) {
         this.statutChef = statutChef;
     }
 
-    public boolean isStatutDirect() {
+    public String isStatutDirect() {
         return statutDirect;
     }
 
-    public void setStatutDirect(boolean statutDirect) {
+    public void setStatutDirect(String statutDirect) {
         this.statutDirect = statutDirect;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

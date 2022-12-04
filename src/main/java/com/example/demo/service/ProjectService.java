@@ -18,6 +18,8 @@ public class ProjectService {
     ProjectRepo projectRepo;
     @Autowired
     UserService userService;
+    @Autowired
+    TaskSercice taskSercice;
 
     public Project findByUserId(String id) {
         return projectRepo.findByUserId(id);
@@ -37,9 +39,13 @@ public class ProjectService {
             System.out.println("exist");
             return null;
         } else {
-            p.setStatutChef(false);
-            p.setStatutDirect(false);
-            return projectRepo.save(p);
+            p.setStatutChef("en attente");
+            p.setStatutDirect("en attente");
+            Project pp=projectRepo.save(p);
+            if(pp.getTasks()!=null){
+                taskSercice.saveAll(pp, pp.getTasks());
+            }
+            return pp;
         }
     }
 
@@ -58,12 +64,12 @@ public class ProjectService {
         return deleteByid;
     }
 
-    public Project changeStautChef(String id,Boolean st) {
+    public Project changeStautChef(String id,String st) {
         Project pro =findProjectById(id);
         pro.setStatutChef(st);
         return projectRepo.save(pro);
     }
-    public Project changeStautDirect(String id,Boolean stDir) {
+    public Project changeStautDirect(String id,String stDir) {
         Project pro =findProjectById(id);
         pro.setStatutDirect(stDir);
         return projectRepo.save(pro);

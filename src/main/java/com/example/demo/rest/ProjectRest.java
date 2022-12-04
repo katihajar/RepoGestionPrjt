@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/project")
 public class ProjectRest {
@@ -34,12 +35,12 @@ public class ProjectRest {
     }
 
     @PutMapping("/chef/{id}/{st}")
-    public Project changeStautChef(@PathVariable String id,@PathVariable Boolean st) {
+    public Project changeStautChef(@PathVariable String id,@PathVariable String st) {
         return projectService.changeStautChef(id, st);
     }
 
     @PutMapping("/dir/{id}/{stDir}")
-    public Project changeStautDirect(@PathVariable String id,@PathVariable Boolean stDir) {
+    public Project changeStautDirect(@PathVariable String id,@PathVariable String stDir) {
         return projectService.changeStautDirect(id, stDir);
     }
 }

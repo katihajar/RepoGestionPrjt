@@ -4,6 +4,7 @@ import com.example.demo.bean.Task;
 import com.example.demo.service.TaskSercice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/task")

@@ -16,9 +16,7 @@ public class Task {
     private String nom;
     @NonNull
     private String TaskDescription;
-    @NonNull
     private Date dateDebut;
-    @NonNull
     private Date dateFin;
     @NonNull
     private float pourcentage;
