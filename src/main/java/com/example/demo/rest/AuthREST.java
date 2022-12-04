@@ -46,9 +46,7 @@ public class AuthREST {
         System.out.println(dto.getPassword());
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         User user = (User) authentication.getPrincipal();
-
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setOwner(user);
         refreshTokenRepository.save(refreshToken);
