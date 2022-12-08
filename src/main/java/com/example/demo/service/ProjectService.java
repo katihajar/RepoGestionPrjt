@@ -21,6 +21,14 @@ public class ProjectService {
     @Autowired
     TaskSercice taskSercice;
 
+    public List<Project> findByUserServicesId(String id) {
+        return projectRepo.findByUserServicesId(id);
+    }
+
+    public List<Project> findAll() {
+        return projectRepo.findAll();
+    }
+
     public Project findByUserId(String id) {
         return projectRepo.findByUserId(id);
     }

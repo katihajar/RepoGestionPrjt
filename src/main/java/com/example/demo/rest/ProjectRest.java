@@ -13,8 +13,8 @@ import java.util.List;
 public class ProjectRest {
     @Autowired
     ProjectService projectService;
-
-    public Project findByUserId(String id) {
+    @GetMapping("/userProject/{id}")
+    public Project findByUserId(@PathVariable String id) {
         return projectService.findByUserId(id);
     }
 
@@ -43,4 +43,16 @@ public class ProjectRest {
     public Project changeStautDirect(@PathVariable String id,@PathVariable String stDir) {
         return projectService.changeStautDirect(id, stDir);
     }
+
+    @GetMapping("/")
+    public List<Project> findAll() {
+        return projectService.findAll();
+    }
+
+    @GetMapping("/serviveProject/{id}")
+    public List<Project> findByUserServicesId(@PathVariable String id) {
+        return projectService.findByUserServicesId(id);
+    }
+
+
 }
