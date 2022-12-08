@@ -1,5 +1,6 @@
 package com.example.demo.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NonNull;
@@ -18,7 +19,9 @@ public class Project {
     private String nomProjet;
     private String description;
     private double cout;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateDebut;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date dateFin;
     private String statutChef;
     private String statutDirect;

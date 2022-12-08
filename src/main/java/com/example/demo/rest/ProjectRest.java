@@ -20,7 +20,7 @@ public class ProjectRest {
 
     @PostMapping("/")
     public Project save(@RequestBody Project p) {
-        System.out.println("user : "+ p.getUser());
+        System.out.println("hna rest");
         return projectService.save(p);
     }
 

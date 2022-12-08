@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Random;
 
 
 @Service
@@ -47,11 +48,24 @@ public class ProjectService {
             System.out.println("exist");
             return null;
         } else {
-            p.setStatutChef("en attente");
-            p.setStatutDirect("en attente");
-            Project pp=projectRepo.save(p);
-            if(pp.getTasks()!=null){
-                taskSercice.saveAll(pp, pp.getTasks());
+            Project pp = new Project();
+            pp.setNomProjet(p.getNomProjet());
+            projectRepo.save(pp);
+            Project p1 = findByNomProjet(pp.getNomProjet());
+            p1.setDescription(p.getDescription());
+            p1.setCout(p.getCout());
+            p1.setUser(p.getUser());
+            p1.setServices(p.getServices());
+            p1.setStatutChef("en attente");
+            p1.setStatutDirect("en attente");
+            p1.setDateDebut(p.getDateDebut());
+            p1.setDateFin(p.getDateFin());
+            System.out.println("hna save lwla" + p1);
+            Project pTest= projectRepo.save(p1);
+            System.out.println("hna deznaaa "+ p.getTasks());
+
+            if(p.getTasks()!=null){
+                taskSercice.saveAll(pTest, p.getTasks());
             }
             return pp;
         }

@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.bean.Project;
 import com.example.demo.bean.Task;
+import com.example.demo.repository.ProjectRepo;
 import com.example.demo.repository.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.List;
 public class TaskSercice {
     @Autowired
     TaskRepo taskRepo;
+    @Autowired
+    ProjectRepo projectRepo;
 
     public List<Task> findByProjectId(String id) {
         return taskRepo.findByProjectId(id);
@@ -24,6 +27,7 @@ public class TaskSercice {
 
     public List<Task> saveAll(Project project, List<Task> tasks) {
         List<Task> taskList = new ArrayList<>();
+        System.out.println("hna all"  +tasks);
         for (Task task : tasks) {
             Task task2 ;
             task.setProject(project);
@@ -45,8 +49,12 @@ public class TaskSercice {
             System.out.println("exist");
             return null;
         } else {
+            System.out.println(" first t1 "+task.getProject().getId());
+            Project p = projectRepo.findProjectById(task.getProject().getId());
+            task.setProject(p);
             task.setStatutChef("en attente");
             task.setStatutDirect("en attente");
+            System.out.println("t2 "+task);
             return taskRepo.save(task);
         }
     }
