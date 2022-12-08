@@ -29,7 +29,7 @@ public class ProjectService {
         return projectRepo.findAll();
     }
 
-    public Project findByUserId(String id) {
+    public List<Project> findByUserId(String id) {
         return projectRepo.findByUserId(id);
     }
 

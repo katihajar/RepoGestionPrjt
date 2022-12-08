@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepo extends MongoRepository<Project, String> {
-    Project findByUserId(String id);
+    List<Project> findByUserId(String id);
     Project findProjectById(String id);
     Project findByNomProjet(String nom);
     int deleteProjectByid(String id);

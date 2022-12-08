@@ -14,7 +14,7 @@ public class ProjectRest {
     @Autowired
     ProjectService projectService;
     @GetMapping("/userProject/{id}")
-    public Project findByUserId(@PathVariable String id) {
+    public List<Project> findByUserId(@PathVariable String id) {
         return projectService.findByUserId(id);
     }
 
