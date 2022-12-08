@@ -5,12 +5,18 @@ import com.example.demo.service.TaskSercice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/task")
 public class TaskRest {
     @Autowired
     TaskSercice taskSercice;
+    @GetMapping("/ProjectId/{id}")
+    public List<Task> findByProjectId(@PathVariable String id) {
+        return taskSercice.findByProjectId(id);
+    }
 
     @GetMapping("/id/{id}")
     public Task findTaskById(@PathVariable String id) {

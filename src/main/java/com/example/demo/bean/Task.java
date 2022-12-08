@@ -15,7 +15,7 @@ public class Task {
     @NonNull
     private String nom;
     @NonNull
-    private String TaskDescription;
+    private String taskDescription;
     private Date dateDebut;
     private Date dateFin;
     @NonNull

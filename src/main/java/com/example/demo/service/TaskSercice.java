@@ -14,6 +14,10 @@ public class TaskSercice {
     @Autowired
     TaskRepo taskRepo;
 
+    public List<Task> findByProjectId(String id) {
+        return taskRepo.findByProjectId(id);
+    }
+
     public Task findTaskById(String id) {
         return taskRepo.findTaskById(id);
     }
