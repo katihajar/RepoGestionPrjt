@@ -24,6 +24,8 @@ public class Project {
     private String statutDirect;
     @DBRef
     private User user;
+    @DBRef
+    private Services services;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Task> tasks;
     public Project() {
@@ -106,5 +108,21 @@ public class Project {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public String getStatutChef() {
+        return statutChef;
+    }
+
+    public String getStatutDirect() {
+        return statutDirect;
+    }
+
+    public Services getServices() {
+        return services;
+    }
+
+    public void setServices(Services services) {
+        this.services = services;
     }
 }

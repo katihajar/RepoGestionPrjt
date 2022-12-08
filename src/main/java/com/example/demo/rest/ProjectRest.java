@@ -50,8 +50,8 @@ public class ProjectRest {
     }
 
     @GetMapping("/serviveProject/{id}")
-    public List<Project> findByUserServicesId(@PathVariable String id) {
-        return projectService.findByUserServicesId(id);
+    public List<Project> findByServicesId(@PathVariable String id) {
+        return projectService.findByServicesId(id);
     }
 
 
