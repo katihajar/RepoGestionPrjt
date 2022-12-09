@@ -60,10 +60,7 @@ public class ProjectService {
             p1.setStatutDirect("en attente");
             p1.setDateDebut(p.getDateDebut());
             p1.setDateFin(p.getDateFin());
-            System.out.println("hna save lwla" + p1);
             Project pTest= projectRepo.save(p1);
-            System.out.println("hna deznaaa "+ p.getTasks());
-
             if(p.getTasks()!=null){
                 taskSercice.saveAll(pTest, p.getTasks());
             }

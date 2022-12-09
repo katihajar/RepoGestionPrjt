@@ -27,7 +27,6 @@ public class TaskSercice {
 
     public List<Task> saveAll(Project project, List<Task> tasks) {
         List<Task> taskList = new ArrayList<>();
-        System.out.println("hna all"  +tasks);
         for (Task task : tasks) {
             Task task2 ;
             task.setProject(project);
@@ -49,7 +48,6 @@ public class TaskSercice {
             System.out.println("exist");
             return null;
         } else {
-            System.out.println(" first t1 "+task.getProject().getId());
             Project p = projectRepo.findProjectById(task.getProject().getId());
             task.setProject(p);
             task.setStatutChef("en attente");
@@ -60,7 +58,6 @@ public class TaskSercice {
     }
 
     public Task update(Task task){
-        System.out.println(" first t1 "+task);
         Task t = findTaskById(task.getId());
         t.setPourcentage(task.getPourcentage());
         return taskRepo.save(t);
