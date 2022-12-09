@@ -60,12 +60,9 @@ public class TaskSercice {
     }
 
     public Task update(Task task){
+        System.out.println(" first t1 "+task);
         Task t = findTaskById(task.getId());
-        t.setDateDebut(task.getDateDebut());
-        t.setDateFin(task.getDateFin());
-        t.setNom(task.getNom());
         t.setPourcentage(task.getPourcentage());
-        t.setTaskDescription(task.getTaskDescription());
         return taskRepo.save(t);
     }
 

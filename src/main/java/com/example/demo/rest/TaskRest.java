@@ -28,7 +28,7 @@ public class TaskRest {
         return taskSercice.save(task);
     }
 
-    @PutMapping("/")
+    @PutMapping("/hna")
     public Task update(@RequestBody Task task) {
         return taskSercice.update(task);
     }
