@@ -63,16 +63,16 @@ public class TaskSercice {
         return taskRepo.save(t);
     }
 
-    public Task ValidateDirect(String id,String st){
-        Task ts1 = findTaskById(id);
-        ts1.setStatutDirect(st);
+    public Task ValidateDirect(Task tt){
+        Task ts1 = findTaskById(tt.getId());
+        ts1.setStatutDirect(tt.getStatutDirect());
         return taskRepo.save(ts1);
     }
 
 
-    public Task ValidateChef(String id,String st){
-        Task ts2 = findTaskById(id);
-        ts2.setStatutChef(st);
+    public Task ValidateChef(Task t){
+        Task ts2 = findTaskById(t.getId());
+        ts2.setStatutChef(t.getStatutChef());
         return taskRepo.save(ts2);
     }
 }

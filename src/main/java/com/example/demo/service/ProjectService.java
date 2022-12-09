@@ -83,14 +83,14 @@ public class ProjectService {
         return deleteByid;
     }
 
-    public Project changeStautChef(String id,String st) {
-        Project pro =findProjectById(id);
-        pro.setStatutChef(st);
+    public Project changeStautChef(Project p) {
+        Project pro =findProjectById(p.getId());
+        pro.setStatutChef(p.getStatutChef());
         return projectRepo.save(pro);
     }
-    public Project changeStautDirect(String id,String stDir) {
-        Project pro =findProjectById(id);
-        pro.setStatutDirect(stDir);
+    public Project changeStautDirect(Project p) {
+        Project pro =findProjectById(p.getId());
+        pro.setStatutDirect(p.getStatutDirect());
         return projectRepo.save(pro);
     }
 }

@@ -32,12 +32,12 @@ public class TaskRest {
     public Task update(@RequestBody Task task) {
         return taskSercice.update(task);
     }
-    @PutMapping("/valdDir/{id}/{st}")
-    public Task ValidateDirect(@PathVariable String id,@PathVariable  String st) {
-        return taskSercice.ValidateDirect(id, st);
+    @PutMapping("/valdDir/")
+    public Task ValidateDirect(@RequestBody Task t) {
+        return taskSercice.ValidateDirect(t);
     }
-    @PutMapping("/valdChef/{id}/{st}")
-    public Task ValidateChef(@PathVariable String id,@PathVariable  String st) {
-        return taskSercice.ValidateChef(id, st);
+    @PutMapping("/valdChef/")
+    public Task ValidateChef(@RequestBody Task t) {
+        return taskSercice.ValidateChef(t);
     }
 }

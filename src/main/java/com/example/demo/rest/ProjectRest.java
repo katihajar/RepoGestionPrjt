@@ -33,14 +33,14 @@ public class ProjectRest {
         return projectService.deleteProjectByid(id);
     }
 
-    @PutMapping("/chef/{id}/{st}")
-    public Project changeStautChef(@PathVariable String id,@PathVariable String st) {
-        return projectService.changeStautChef(id, st);
+    @PutMapping("/chef/")
+    public Project changeStautChef(@RequestBody Project p) {
+        return projectService.changeStautChef(p);
     }
 
-    @PutMapping("/dir/{id}/{stDir}")
-    public Project changeStautDirect(@PathVariable String id,@PathVariable String stDir) {
-        return projectService.changeStautDirect(id, stDir);
+    @PutMapping("/dir/")
+    public Project changeStautDirect(@RequestBody Project p) {
+        return projectService.changeStautDirect(p);
     }
 
     @GetMapping("/")
