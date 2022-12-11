@@ -52,6 +52,12 @@ public class ProjectRest {
     public List<Project> findByServicesId(@PathVariable String id) {
         return projectService.findByServicesId(id);
     }
-
-
+    @GetMapping("/project/{id}")
+    public Project findProjectById(@PathVariable String id) {
+        return projectService.findProjectById(id);
+    }
+    @GetMapping("/projectServives/{id}/{st}")
+    public List<Project> findByServicesIdAndStatutChef(@PathVariable String id,@PathVariable String st) {
+        return projectService.findByServicesIdAndStatutChef(id, st);
+    }
 }

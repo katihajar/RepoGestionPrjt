@@ -26,6 +26,10 @@ public class ProjectService {
         return projectRepo.findByServicesId(id);
     }
 
+    public List<Project> findByServicesIdAndStatutChef(String id, String st) {
+        return projectRepo.findByServicesIdAndStatutChef(id, st);
+    }
+
     public List<Project> findAll() {
         return projectRepo.findAll();
     }
